@@ -65,6 +65,19 @@
         "type": "github"
       }
     },
+    "nimblelock": {
+      "flake": false,
+      "locked": {
+        "lastModified": 0,
+        "narHash": "sha256-lZyxALbUiHnL7Lk9mrVTdZCDJfrVx9CTnYbpzjRM84k=",
+        "path": "",
+        "type": "path"
+      },
+      "original": {
+        "path": "",
+        "type": "path"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1695172478,
@@ -83,6 +96,7 @@
     "root": {
       "inputs": {
         "dsf": "dsf",
+        "nimblelock": "nimblelock",
         "nixpkgs": "nixpkgs"
       }
     },

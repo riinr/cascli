@@ -1,0 +1,4 @@
+[cassandra]
+ips=127.0.0.1
+user=cassandra
+pass=cassandra

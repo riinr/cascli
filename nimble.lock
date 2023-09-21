@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "packages": {
+    "cassandra": {
+      "version": "0.1.0",
+      "vcsRevision": "a0acb3bd37b858559ee5b52f34a01490176fc87e",
+      "url": "https://github.com/yglukhov/cassandra",
+      "downloadMethod": "git",
+      "dependencies": [],
+      "checksums": {
+        "sha1": "84a3b0fa1d5b120a67470c3ac0bda613f5e7973e",
+        "sha256": "HT9OMXND2MDHVPqmeww0ca+/7Zmmblu0Mm/Lppmbd9c="
+      }
+    }
+  },
+  "tasks": {}
+}
