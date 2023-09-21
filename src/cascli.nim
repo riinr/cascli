@@ -20,6 +20,28 @@ proc uid2str(v: Value): string =
   result = $uidcstr
   uidcstr.dealloc
 
+proc duration2str(v: Value): string =
+  var 
+    month: int32
+    days:   int32
+    nanos:  int64
+  discard v.o.cass_value_get_duration(addr month, addr days, addr nanos)
+  let year  = month div                12
+  month     = month mod                12
+  let hours = nanos div 3_600_000_000_000
+  nanos     = nanos mod 3_600_000_000_000
+  let mins  = nanos div    60_000_000_000
+  nanos     = nanos mod    60_000_000_000
+  let secs  = nanos div     1_000_000_000
+  nanos     = nanos mod     1_000_000_000
+  let mili  = nanos div         1_000_000
+  nanos     = nanos mod         1_000_000
+  let micr  = nanos div             1_000
+  nanos     = nanos mod             1_000
+  "P" & $year & "Y"  & $month & "M"  & $days  & "DT" &
+       $hours & "H"  & $mins  & "M"  & $secs  & "S" &
+       $mili  & "ms" & $micr  & "us" & $nanos & "ns"
+
 proc main() {.async.} =
   if stdin.isATTY:
     echo """Excpect a CQL command from stdin"""
@@ -69,9 +91,15 @@ proc main() {.async.} =
         continue
       case v.kind
       of CASS_VALUE_TYPE_TEXT, CASS_VALUE_TYPE_VARCHAR:
-        line.add('"' & $v & '"')
-      of CASS_VALUE_TYPE_UUID:
-        line.add(v.uid2str)
+        line.add '"' & $v & '"'
+      of CASS_VALUE_TYPE_UUID, CASS_VALUE_TYPE_TIMEUUID:
+        line.add v.uid2str
+      of CASS_VALUE_TYPE_DURATION:
+        line.add v.duration2str
+      of CASS_VALUE_TYPE_DATE:
+        line.add $v.uint32
+      of CASS_VALUE_TYPE_TIME:
+        line.add $v.int64
       else:
         line.add($v)
     echo line.join(",")
