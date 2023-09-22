@@ -1,6 +1,5 @@
 { 
     cassandra-cpp-driver
-  , fetchgit
   , nimbleLock
   , nimPackages
 }:
@@ -10,11 +9,10 @@ nimPackages.buildNimPackage {
   doCheck = false;
   pname   = "casandra";
   version = cassInfo.version;
-  src     = fetchgit {
+  src     = builtins.fetchGit {
     url     = cassInfo.url;
     rev     = cassInfo.vcsRevision;
-
-    hash    = "sha256:${cassInfo.checksums.sha256}";
+    ref     = "master";
   };
   propagatedBuildInputs = [ cassandra-cpp-driver ];
 }

@@ -3,13 +3,12 @@
   "packages": {
     "cassandra": {
       "version": "0.1.0",
-      "vcsRevision": "a0acb3bd37b858559ee5b52f34a01490176fc87e",
+      "vcsRevision": "1399234e9138a74fd1750e082b4702aec89d861e",
       "url": "https://github.com/yglukhov/cassandra",
       "downloadMethod": "git",
       "dependencies": [],
       "checksums": {
-        "sha1": "84a3b0fa1d5b120a67470c3ac0bda613f5e7973e",
-        "sha256": "HT9OMXND2MDHVPqmeww0ca+/7Zmmblu0Mm/Lppmbd9c="
+        "sha1": "fb85c0624338da911b08e18fac32178df8682695"
       }
     }
   },

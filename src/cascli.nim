@@ -12,35 +12,6 @@ iterator rows(r: Result): Row {.inline.} =
     let o = it.cass_iterator_get_row
     yield Row(o: o)
 
-proc uid2str(v: Value): string =
-  var uidval: CassUuid
-  discard v.o.cass_value_get_uuid(addr uidval)
-  var uidcstr = cast[cstring](create(uint8, CASS_UUID_STRING_LENGTH))
-  uidval.cass_uuid_string uidcstr
-  result = $uidcstr
-  uidcstr.dealloc
-
-proc duration2str(v: Value): string =
-  var 
-    month: int32
-    days:   int32
-    nanos:  int64
-  discard v.o.cass_value_get_duration(addr month, addr days, addr nanos)
-  let year  = month div                12
-  month     = month mod                12
-  let hours = nanos div 3_600_000_000_000
-  nanos     = nanos mod 3_600_000_000_000
-  let mins  = nanos div    60_000_000_000
-  nanos     = nanos mod    60_000_000_000
-  let secs  = nanos div     1_000_000_000
-  nanos     = nanos mod     1_000_000_000
-  let mili  = nanos div         1_000_000
-  nanos     = nanos mod         1_000_000
-  let micr  = nanos div             1_000
-  nanos     = nanos mod             1_000
-  "P" & $year & "Y"  & $month & "M"  & $days  & "DT" &
-       $hours & "H"  & $mins  & "M"  & $secs  & "S" &
-       $mili  & "ms" & $micr  & "us" & $nanos & "ns"
 
 proc main() {.async.} =
   if stdin.isATTY:
@@ -86,20 +57,9 @@ proc main() {.async.} =
     var line = newSeq[string]()
     for i in 0 ..< cols:
       let v = Value(o: r.o.cass_row_get_column(i.csize_t))
-      if v.o.cass_value_is_null == cass_true:
-        line.add("null")
-        continue
       case v.kind
       of CASS_VALUE_TYPE_TEXT, CASS_VALUE_TYPE_VARCHAR:
         line.add '"' & $v & '"'
-      of CASS_VALUE_TYPE_UUID, CASS_VALUE_TYPE_TIMEUUID:
-        line.add v.uid2str
-      of CASS_VALUE_TYPE_DURATION:
-        line.add v.duration2str
-      of CASS_VALUE_TYPE_DATE:
-        line.add $v.uint32
-      of CASS_VALUE_TYPE_TIME:
-        line.add $v.int64
       else:
         line.add($v)
     echo line.join(",")
