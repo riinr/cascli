@@ -3,7 +3,7 @@
 
   inputs.dsf.url          = "github:cruel-intentions/devshell-files";
   inputs.nixpkgs.url      = "github:nixos/nixpkgs";
-  inputs.nimblelock.url   = "path:";
+  inputs.nimblelock.url   = "github:riinr/cascli?shallow=1";
   inputs.nimblelock.flake = false;
   inputs.dsf.inputs.nixpkgs.follows = "nixpkgs";
 

@@ -68,14 +68,17 @@
     "nimblelock": {
       "flake": false,
       "locked": {
-        "lastModified": 0,
-        "narHash": "sha256-P7skfiGnIao3NdnDSFcDY+B1mv+qza8GkXgn2ztKmJg=",
-        "path": "",
-        "type": "path"
+        "lastModified": 1695409842,
+        "narHash": "sha256-NF3jrXzC7QuXbw00MVqGDaNYY1cJsFw/WHIdm+twrAg=",
+        "owner": "riinr",
+        "repo": "cascli",
+        "rev": "b766e2336054fe050fb7913393a32945ce4d7512",
+        "type": "github"
       },
       "original": {
-        "path": "",
-        "type": "path"
+        "owner": "riinr",
+        "repo": "cascli",
+        "type": "github"
       }
     },
     "nixpkgs": {
