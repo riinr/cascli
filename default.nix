@@ -50,4 +50,6 @@ nimPackages.buildNimPackage ({
     base64 $out/cascli.tar.gz >> $out/cascli.sh
     chmod +x $out/cascli.sh
   '';
-} else {}))
+} else {
+  propagatedBuildInputs = [ cassandra-cpp-driver ];
+}))

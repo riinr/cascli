@@ -51,12 +51,16 @@ Nix/NixOS version
 
 ```sh
  nix build .
+
+ printf "SELECT cql_version FROM system.local"|./result/bin/cascli
 ```
 
 LSB version (Linux Standard Base, mostly any other Linux)
 
 ```sh
  nix build .#cascli
+
+ printf "SELECT cql_version FROM system.local"|./result/cascli/cascli
 ```
 
 ## Requirements
@@ -67,9 +71,11 @@ LSB version (Linux Standard Base, mostly any other Linux)
 
 #### Runtime
 
-- [libcassandra](https://github.com/datastax/cpp-driver), compiled at build
-- [libuv](https://github.com/libuv/libuv)
+- [libcassandra](https://github.com/datastax/cpp-driver) (~3 MB), downloaded to ./result/cascli.tar.gz and ./result/cascli.sh, in LSB version
+- [libuv](https://github.com/libuv/libuv) (~0.2 MB), downloaded to ./result/cascli.tar.gz and ./result/cascli.sh, in LSB version
+- [openssl 3](https://www.openssl.org/) (~6 MB, you must install in LSB version
 
 ## TODO:
 
-- [Support more data types](https://github.com/yglukhov/cassandra/blob/master/cassandra/asyncwrapper.nim#L450)
+- [Support more data types](https://github.com/yglukhov/cassandra/blob/master/cassandra/asyncwrapper.nim#L517)
+- musl release
